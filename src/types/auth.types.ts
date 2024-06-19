@@ -16,3 +16,5 @@ export interface IAuthResponse {
   accessToken: string;
   user: IUser;
 }
+
+export type IUserForm = Omit<IUser, "id"> & { password?: string };
