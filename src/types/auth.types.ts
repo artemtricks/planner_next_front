@@ -8,8 +8,8 @@ export interface IUser {
   email: string;
   name?: string;
   workInterval?: number;
-  breackInterval?: number;
-  intervalsCount?: number;
+  breakInterval?: number;
+  intervalCount?: number;
 }
 
 export interface IAuthResponse {
