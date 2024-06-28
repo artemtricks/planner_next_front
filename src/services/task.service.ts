@@ -15,7 +15,7 @@ class TaskService {
   }
 
   async updateTasks(id: string, data: TypeTaskFormState) {
-    const response = await axiosWithAuth.post(`${this.BASE_URL}/${id}`, data);
+    const response = await axiosWithAuth.put(`${this.BASE_URL}/${id}`, data);
     return response;
   }
 

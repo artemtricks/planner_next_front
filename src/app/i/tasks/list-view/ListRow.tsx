@@ -13,7 +13,7 @@ import { SingleSelect } from "@/components/ui/SingleSelect";
 import { useDeleteTask } from "../hook/useDeleteTask";
 
 interface IListRow {
-  setItems: Dispatch<SetStateAction<ITaskResponse[]>>;
+  setItems: Dispatch<SetStateAction<ITaskResponse[] | undefined>>;
   item: ITaskResponse;
 }
 
@@ -55,43 +55,41 @@ export function ListRow({ item, setItems }: IListRow) {
         </span>
       </div>
       <div>
-        <div>
-          <Controller
-            control={control}
-            name="createdAt"
-            render={({ field: { value, onChange } }) => (
-              <DatePicker value={value || ""} onChange={onChange} />
-            )}
-          />
-        </div>
-        <div className="capitalize">
-          <Controller
-            control={control}
-            name="createdAt"
-            render={({ field: { value, onChange } }) => (
-              <SingleSelect
-                value={value || ""}
-                onChange={onChange}
-                data={["high, mediume, low"].map((item) => ({
-                  value: item,
-                  label: item,
-                }))}
-              />
-            )}
-          />
-        </div>
-        <div>
-          <button
-            onClick={() =>
-              item.id
-                ? deleteTask(item.id)
-                : setItems((prev) => prev.slice(0, 1))
-            }
-            className="opacity-50 transition-opacity hover:opacity-100"
-          >
-            {isDeletePending ? <Loader size={15} /> : <Trash size={15} />}
-          </button>
-        </div>
+        <Controller
+          control={control}
+          name="createdAt"
+          render={({ field: { value, onChange } }) => (
+            <DatePicker value={value || ""} onChange={onChange} />
+          )}
+        />
+      </div>
+      <div className="capitalize">
+        <Controller
+          control={control}
+          name="priority"
+          render={({ field: { value, onChange } }) => (
+            <SingleSelect
+              value={value || ""}
+              onChange={onChange}
+              data={["high", "medium", "low"].map((item) => ({
+                value: item,
+                label: item,
+              }))}
+            />
+          )}
+        />
+      </div>
+      <div>
+        <button
+          onClick={() =>
+            item.id
+              ? deleteTask(item.id)
+              : setItems((prev) => prev?.slice(0, 1))
+          }
+          className="opacity-50 transition-opacity hover:opacity-100"
+        >
+          {isDeletePending ? <Loader size={15} /> : <Trash size={15} />}
+        </button>
       </div>
     </div>
   );

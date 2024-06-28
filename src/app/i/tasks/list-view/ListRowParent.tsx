@@ -4,9 +4,11 @@ import { Dispatch, SetStateAction } from "react";
 import styles from "./ListRow.module.scss";
 import { filterTasks } from "../filter-task";
 import { ListRow } from "./ListRow";
+import { FILTERS } from "../columns.data";
+import { ListAddRowInput } from "./ListAddRowInput";
 
 interface IListRowParent {
-  setItems: Dispatch<SetStateAction<ITaskResponse[]>>;
+  setItems: Dispatch<SetStateAction<ITaskResponse[] | undefined>>;
   items: ITaskResponse[];
   value: string;
   label: string;
@@ -33,12 +35,18 @@ export function ListRowParent({
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                 >
-                  <ListRow item={item} setItems={setItems} />
+                  <ListRow item={item} setItems={setItems} key={item.id} />
                 </div>
               )}
             </Draggable>
           ))}
           {provided.placeholder}
+          {value !== "сompleted" && !items.some((item) => !item.id) && (
+            <ListAddRowInput
+              setItems={setItems}
+              filterDate={FILTERS[value] ? FILTERS[value].format() : undefined}
+            />
+          )}
         </div>
       )}
     </Droppable>
