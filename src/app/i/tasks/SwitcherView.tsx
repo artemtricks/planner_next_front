@@ -1,5 +1,5 @@
 import { Kanban, ListTodo } from "lucide-react";
-import { TypeView } from "../TasksView";
+import { TypeView } from "./TasksView";
 import cn from "clsx";
 
 interface ISwitcherView {
