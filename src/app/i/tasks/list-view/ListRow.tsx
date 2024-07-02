@@ -48,7 +48,7 @@ export function ListRow({ item, setItems }: IListRow) {
             control={control}
             name="isComplited"
             render={({ field: { value, onChange } }) => (
-              <Checkbox value={value} onChange={onChange} />
+              <Checkbox checked={value} onChange={onChange} />
             )}
           />
           <TransparentField {...register("name")} />

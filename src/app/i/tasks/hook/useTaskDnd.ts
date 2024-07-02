@@ -10,7 +10,7 @@ export function useTaskDnd() {
     const destinationColumnId = result.destination.droppableId;
     if (destinationColumnId === result.source.droppableId) return;
 
-    if (destinationColumnId === "complited") {
+    if (destinationColumnId === "completed") {
       updateTasks({
         id: result.draggableId,
         data: {
